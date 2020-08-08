@@ -1,0 +1,35 @@
+body{
+	height:100px;
+	width:90%;
+	background-color:grey;
+}
+img{
+height:160px;
+}
+.banner-content{
+	    
+   
+	 margin-top: 5%;        
+	  
+}
+.center{
+	 display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+button{
+	height:40px;
+	width:20%;
+
+	padding:10px;
+	font-size:15px;
+	color:red;
+	background:blue;
+	border:none;
+	border-radius:5px;
+	margin:20px;
+	margin-left:500px;
+	cursor:pointer;
+	position:absolute;
+}

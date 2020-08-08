@@ -1,0 +1,84 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
+<%@page import="java.sql.Connection"%>
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+<head>
+<title>Student's Site | Article</title>
+<meta charset="utf-8">
+
+
+</head>
+<body id="page4">
+    
+        <%
+                Connection cn=(Connection)application.getAttribute("CONN");
+                String cid=request.getParameter("c_id");
+                String name=request.getParameter("c_name");
+                String cont=request.getParameter("t3");
+                String dur=request.getParameter("t4");
+                String opfee=request.getParameter("t5");
+                double fee=Double.parseDouble(opfee);
+                
+                String opr=request.getParameter("operation");
+                
+                if(opr.equalsIgnoreCase("Insert"))
+                {
+                    PreparedStatement ps=cn.prepareStatement("insert into course_details(course_id,course_name,course_content,course_dur,fee) values(?,?,?,?,?)");
+                    
+                    ps.setString(1,cid);
+                    ps.setString(2,name);
+                    ps.setString(3,cont);
+                    ps.setString(4,dur);
+                    ps.setDouble(5,fee);
+                
+                    int a=ps.executeUpdate();
+                    if(a>0)
+                    {
+                        javax.swing.JOptionPane.showMessageDialog(null, "Record Inserted");
+                        response.sendRedirect("AdminCourse.jsp");
+                    }
+                }
+                else if(opr.equalsIgnoreCase("Update"))
+                {
+                    PreparedStatement ps=cn.prepareStatement("update course_details set course_name=?,course_content=?,course_dur=?,fee=? where course_id=?");
+                    ps.setString(1, name);
+                    ps.setString(2,cont);
+                    ps.setString(3,dur);
+                    ps.setDouble(4, fee);
+                    ps.setString(5,cid);
+                    
+                    int a=ps.executeUpdate();
+                    if(a>0)
+                    {
+                        javax.swing.JOptionPane.showMessageDialog(null, "Record Updated");
+                        response.sendRedirect("AdminCourse.jsp");
+                    }
+                    
+                    
+                    
+                }
+                else if(opr.equalsIgnoreCase("Delete"))
+                {
+                    PreparedStatement ps=cn.prepareStatement("delete from course_details where course_id=?");
+                    ps.setString(1, cid);
+                    
+                    int a=ps.executeUpdate();
+                    if(a>0)
+                    {
+                        javax.swing.JOptionPane.showMessageDialog(null, "Record Deleted");
+                        response.sendRedirect("AdminCourse.jsp");
+                    }
+                    
+                }
+                
+                
+                
+        %>
+    
+    
+</body>
+</html>
